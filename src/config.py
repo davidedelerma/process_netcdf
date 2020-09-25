@@ -6,10 +6,13 @@ std_names = {
     'Total precipitation': 'precipitation_flux',
     'Sea surface temperature': 'sea_surface_temperature',
     'Soil temperature level 1': 'soil_temperature',
-    'Volumetric soil water layer 1': 'volume_fraction_of_condensed_water_in_soil'
+    'Volumetric soil water layer 1': 'volume_fraction_of_condensed_water_in_soil',
+    'precipitation rate': 'precipitation_rate'
 }
 
 url = 'http://37.128.186.209/LAURA/ERA5/30year'
+
+start_value = int(os.getenv('START_ITERATION', '0'))
 
 
 def get_aws_config() -> Tuple[str, str, str, str]:

@@ -4,12 +4,12 @@ from pathlib import Path
 from shutil import rmtree
 from time import sleep
 
-from src.config import std_names, url
+from src.config import start_value, std_names, url
 from src.services.cube_service import merge_all_nc, add_standard_name_to_cube
 from src.services.decompress_service import uncompress_downloaded_tar
 from src.services.html_service import get_html_data_list, download_file
-from src.services.upload_service import upload_to_s3, \
-    make_s3_destination_filename
+from src.services.upload_service import make_s3_destination_filename, \
+    upload_to_s3
 
 
 def make_url(base_url: str, filename: str) -> str:
@@ -47,13 +47,12 @@ def cleanup_folder(folder_path: str) -> None:
     rmtree(folder_path)
 
 
-def main(url: str) -> None:
-    data_list = get_html_data_list(site=url)
+def main(url_for_data: str) -> None:
+    data_list = get_html_data_list(site=url_for_data)[start_value:]
     print(f'there are {len(data_list)} file to process')
     count = 0
     for data in data_list:
-        count += 1
-        site = make_url(url, data)
+        site = make_url(url_for_data, data)
         dest_path = make_dest_path(filename=data)
         print(f'start downloading {data}')
         downloaded_file = download_file(site=site, dest_path=dest_path)
@@ -69,7 +68,7 @@ def main(url: str) -> None:
         cleanup_folder(folder_path=str(Path(folder_with_nc).parent))
         print(f'processed {count} of {len(data_list)}')
         s3_destination = make_s3_destination_filename(
-            url=url, merged_nc_filepath=merged_nc_filepath)
+            url=url_for_data, merged_nc_filepath=merged_nc_filepath)
         print(f'S3 destination: {s3_destination}')
         upload_to_s3(src_path=merged_nc_filepath, dest_path=s3_destination)
         print(
@@ -83,4 +82,4 @@ def main(url: str) -> None:
 
 
 if __name__ == "__main__":
-    main(url=url)
+    main(url_for_data=url)
