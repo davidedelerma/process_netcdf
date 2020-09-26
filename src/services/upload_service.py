@@ -1,7 +1,8 @@
-import boto3
 import os
 import sys
 import threading
+
+import boto3
 
 from src.config import get_aws_config
 
