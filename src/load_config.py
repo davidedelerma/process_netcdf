@@ -1,18 +1,15 @@
+import json
 import os
 from typing import Tuple
 
-std_names = {
-    '2 metre temperature': 'surface_temperature',
-    'Total precipitation': 'precipitation_flux',
-    'Sea surface temperature': 'sea_surface_temperature',
-    'Soil temperature level 1': 'soil_temperature',
-    'Volumetric soil water layer 1': 'volume_fraction_of_condensed_water_in_soil',
-    'precipitation rate': 'precipitation_rate'
-}
+with open("config.json") as json_data_file:
+    config = json.load(json_data_file)
 
-url = 'http://37.128.186.209/LAURA/ERA5/30year'
+std_names = config['standard_names']
 
-start_value = int(os.getenv('START_ITERATION', '0'))
+url = config['url']
+
+start_value = config['start_value']
 
 
 def get_aws_config() -> Tuple[str, str, str, str]:
