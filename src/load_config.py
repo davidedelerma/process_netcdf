@@ -1,8 +1,9 @@
 import json
 import os
+from pathlib import Path
 from typing import Tuple
 
-with open("config.json") as json_data_file:
+with open(Path(__file__).parent / "config.json") as json_data_file:
     config = json.load(json_data_file)
 
 std_names = config['standard_names']
