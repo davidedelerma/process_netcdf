@@ -4,12 +4,11 @@ from pathlib import Path
 from shutil import rmtree
 from time import sleep
 
-from src.config import start_value, std_names, url
-from src.services.cube_service import merge_all_nc, add_standard_name_to_cube
-from src.services.decompress_service import uncompress_downloaded_tar
-from src.services.html_service import get_html_data_list, download_file
-from src.services.upload_service import make_s3_destination_filename, \
-    upload_to_s3
+from load_config import start_value, std_names, url
+from services.cube_service import merge_all_nc, add_standard_name_to_cube
+from services.decompress_service import uncompress_downloaded_tar
+from services.html_service import get_html_data_list, download_file
+from services.upload_service import make_s3_destination_filename, upload_to_s3
 
 
 def make_url(base_url: str, filename: str) -> str:

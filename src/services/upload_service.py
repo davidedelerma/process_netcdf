@@ -4,7 +4,7 @@ import threading
 
 import boto3
 
-from src.config import get_aws_config
+from load_config import get_aws_config
 
 
 def upload_to_s3(src_path: str, dest_path: str) -> None:

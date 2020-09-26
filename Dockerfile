@@ -14,4 +14,6 @@ ENV S3_ID=testID
 ENV S3_KEY=test_key
 
 COPY ./src ./work/src
+COPY ./notebooks ./work/notebooks
+
 
