@@ -10,7 +10,22 @@ e.g.: `docker build -t davidedelerma/nc_playground:0.0.6 .`
 
 then run the docker container using:
 
-`docker run -it -p 8888:8888 -e S3_ID=<your aws access key>> -e S3_KEY=<your aws secret access key>>  davidedelerma/netcdf_playground:0.0.5`
+`docker run -it 
+-p 8888:8888 
+-e S3_ID=<your aws access key> 
+-e S3_KEY=<your aws secret access key> 
+davidedelerma/netcdf_playground:0.0.6`
 
 This docker file is based on the official jupyter notebook base image so full focumentation can be found at:
 [Link to official jupyer docker documentation](https://jupyter-docker-stacks.readthedocs.io/en/latest/using/common.html)
+
+### To run the 30 years average processor:
+
+`docker run -it 
+-e GRANT_SUDO=yes 
+--user root 
+-p 8888:8888 
+-e S3_ID=<your aws access key> 
+-e S3_KEY=<your aws secret access key> 
+davidedelerma/nc_playground:0.0.6 
+python work/src/entrypoints/process_30ys_average.py`
