@@ -27,6 +27,7 @@ def download_file(site: str, dest_path: str) -> Optional[str]:
         except HTTPError:
             print(
                 f'cannot download file from {site} because of {r.status_code}')
+            return None
         try:
             if path.exists(dest_path):
                 print(f'file {dest_path} already downloaded')
@@ -38,4 +39,3 @@ def download_file(site: str, dest_path: str) -> Optional[str]:
             print(f'cannot download file because of {e}')
             return None
     return dest_path
-    

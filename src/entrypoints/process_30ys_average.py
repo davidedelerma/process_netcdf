@@ -55,6 +55,8 @@ def main(url_for_data: str) -> None:
         dest_path = make_dest_path(filename=data)
         print(f'start downloading {data}')
         downloaded_file = download_file(site=site, dest_path=dest_path)
+        if not downloaded_file:
+            continue
         print(f'downloaded file {downloaded_file}')
         folder_with_nc = uncompress_downloaded_tar(
             downloaded_file_path=downloaded_file, filename=data)
