@@ -19,6 +19,14 @@ davidedelerma/netcdf_playground:0.0.6`
 This docker file is based on the official jupyter notebook base image so full focumentation can be found at:
 [Link to official jupyer docker documentation](https://jupyter-docker-stacks.readthedocs.io/en/latest/using/common.html)
 
+### To persist the jupyter notebooks:  
+```
+docker run -it -p 8888:8888 
+-e S3_ID=test 
+-e S3_KEY=test 
+-v <absolute path to project directory>/notebooks:/home/jovyan/work davidedelerma/nc_playground:0.0.19
+```
+
 ### To run the 30 years average processor:
 
 `docker run -it 
@@ -27,5 +35,7 @@ This docker file is based on the official jupyter notebook base image so full fo
 -p 8888:8888 
 -e S3_ID=<your aws access key> 
 -e S3_KEY=<your aws secret access key>
-davidedelerma/nc_playground:0.0.6 
-python ./src/entrypoints/process_30ys_average.py`
+-e PYTHONPATH=/home/jovyan/code/src/
+-w /home/jovyan/code/src
+davidedelerma/nc_playground:0.0.19 
+python ./entrypoints/process_30ys_average.py`
