@@ -11,7 +11,7 @@ def get_html_data_list(site: str) -> List[str]:
     html = requests.get(site)
     try:
         html.raise_for_status()
-    except HTTPError as err:
+    except HTTPError:
         print(f'cannot get html from {site} because of {html.status_code}')
     soup = BeautifulSoup(html.text, 'html.parser')
     for link in soup.find_all('a'):
@@ -24,7 +24,7 @@ def download_file(site: str, dest_path: str) -> Optional[str]:
     with requests.get(site, stream=True) as r:
         try:
             r.raise_for_status()
-        except HTTPError as err:
+        except HTTPError:
             print(
                 f'cannot download file from {site} because of {r.status_code}')
         try:
@@ -36,5 +36,6 @@ def download_file(site: str, dest_path: str) -> Optional[str]:
                     f.write(chunk)
         except Exception as e:
             print(f'cannot download file because of {e}')
-            dest_path = None
+            return None
     return dest_path
+    
