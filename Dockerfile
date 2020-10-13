@@ -12,9 +12,7 @@ ENV S3_URL=http://s3-uk-1.sa-catapult.co.uk
 ENV S3_BUCKET=csvs-netcdf
 ENV S3_ID=testID
 ENV S3_KEY=test_key
-ENV PYTHONPATH="/home/jovyan/work/src"
+ENV PYTHONPATH="/home/jovyan/src"
 
-COPY ./src ./work/src
-COPY ./notebooks ./work/notebooks
-
-
+COPY ./src ./src
+COPY --chown=$NB_UID ./notebooks ./work/notebooks

@@ -26,6 +26,6 @@ This docker file is based on the official jupyter notebook base image so full fo
 --user root 
 -p 8888:8888 
 -e S3_ID=<your aws access key> 
--e S3_KEY=<your aws secret access key> 
+-e S3_KEY=<your aws secret access key>
 davidedelerma/nc_playground:0.0.6 
-python work/src/entrypoints/process_30ys_average.py`
+python ./src/entrypoints/process_30ys_average.py`
